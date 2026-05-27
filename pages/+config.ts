@@ -6,8 +6,9 @@ import vikeReact from "vike-react/config";
 
 const config: Config = {
   // https://vike.dev/head-tags
-  title: "My Vike App",
-  description: "Demo showcasing Vike",
+  title: "FaceR",
+  description: "Landing page de FaceR",
+  prerender: true,
 
   extends: [vikeReact],
 };
