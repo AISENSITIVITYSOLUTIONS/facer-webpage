@@ -104,6 +104,32 @@ function WhatsAppIcon({ className }) {
   );
 }
 
+function LinkedInIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M6.94 6.5a2.18 2.18 0 1 1 0-4.36 2.18 2.18 0 0 1 0 4.36ZM4.98 21.5h3.9V8.3h-3.9v13.2ZM11.46 8.3h3.73v1.8h.05c.52-.98 1.78-2.02 3.67-2.02 3.92 0 4.64 2.58 4.64 5.94v7.48h-3.9v-6.63c0-1.58-.03-3.62-2.2-3.62-2.2 0-2.54 1.72-2.54 3.5v6.75h-3.9V8.3h.45Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function TelegramIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className} fill="currentColor">
+      <path d="M21.7 4.25c.3-1.38-.95-1.9-1.98-1.48L3.05 9.2c-1.14.44-1.12 1.08-.2 1.36l4.28 1.34 9.92-6.26c.47-.28.9-.13.55.18l-8.03 7.25-.3 4.47c.44 0 .64-.2.88-.44l2.11-2.05 4.38 3.24c.81.45 1.39.22 1.6-.75L21.7 4.25Z" />
+    </svg>
+  );
+}
+
 function VideoCard({ video, index }) {
   const ref = useRef(null);
   const [hasError, setHasError] = useState(false);
@@ -395,8 +421,56 @@ export default function FacerLandingPage() {
       </section>
 
       <footer className="relative z-10 border-t border-white/10 px-5 py-8 text-center text-sm text-slate-400 sm:px-8">
-        <p>Desarrollado por Neural Network Initiative</p>
-        <p className="mt-2">fdealbam@nni.ai</p>
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3">
+          <a
+            href="https://nni-official-page.web.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-cyan-100 transition hover:text-white"
+          >
+            Desarrollado por Neural Network Initiative
+          </a>
+          <p>Tels: 55 2749 1298 y 55 2708 8372</p>
+          <p>Email: fdealbam@nni.ai</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <a
+              href="https://www.linkedin.com/in/neural-network-initiative-8a1b61263/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn de Neural Network Initiative"
+              className="flex h-20 w-20 items-center justify-center rounded-full border border-cyan-200/20 bg-white/10 text-cyan-100 transition hover:bg-cyan-300/15 hover:text-white"
+            >
+              <LinkedInIcon className="h-10 w-10" />
+            </a>
+            <a
+              href="https://whatsapp.com/channel/0029Vb7SrIJC1FuIGt1Mup1S"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Canal de WhatsApp de Neural Network Initiative"
+              className="flex h-20 w-20 items-center justify-center rounded-full border border-cyan-200/20 bg-white/10 text-cyan-100 transition hover:bg-cyan-300/15 hover:text-white"
+            >
+              <WhatsAppIcon className="h-10 w-10" />
+            </a>
+            <a
+              href="https://www.instagram.com/neuralnetin/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram de Neural Network Initiative"
+              className="flex h-20 w-20 items-center justify-center rounded-full border border-cyan-200/20 bg-white/10 text-cyan-100 transition hover:bg-cyan-300/15 hover:text-white"
+            >
+              <InstagramIcon className="h-10 w-10" />
+            </a>
+            <a
+              href="https://t.me/nni2026"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Canal de Telegram de Neural Network Initiative"
+              className="flex h-20 w-20 items-center justify-center rounded-full border border-cyan-200/20 bg-white/10 text-cyan-100 transition hover:bg-cyan-300/15 hover:text-white"
+            >
+              <TelegramIcon className="h-10 w-10" />
+            </a>
+          </div>
+        </div>
       </footer>
     </main>
   );
