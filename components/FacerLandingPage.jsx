@@ -76,9 +76,15 @@ const VIDEO_GROUPS = [
 function BrandLogo() {
   return (
     <div className="flex items-center gap-3">
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/30 bg-white/10 shadow-lg shadow-cyan-500/10 backdrop-blur">
-        <span className="text-lg font-semibold tracking-tight text-white">FR</span>
-      </div>
+      <motion.div
+        whileHover={{ y: -2, scale: 1.04 }}
+        transition={{ type: "spring", stiffness: 320, damping: 18 }}
+        className="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-200/35 bg-white/90 shadow-[0_12px_34px_rgba(34,211,238,0.24)] backdrop-blur"
+      >
+        <div className="absolute -inset-1 rounded-[1.35rem] bg-cyan-300/20 blur-md" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white via-cyan-50 to-white" />
+        <img src="/facer-mark.svg" alt="FaceR" className="relative h-10 w-10 object-contain drop-shadow-[0_3px_8px_rgba(6,40,81,0.18)]" />
+      </motion.div>
       <div>
         <div className="text-xl font-semibold tracking-tight text-white">
           F<span className="text-white/85">ace</span>R
@@ -152,7 +158,7 @@ function VideoCard({ video, index }) {
   );
 }
 
-function VideoCarousel({ group }) {
+function VideoCarousel({ group, showHeader = true }) {
   const railRef = useRef(null);
 
   const scroll = (direction) => {
@@ -164,12 +170,14 @@ function VideoCarousel({ group }) {
 
   return (
     <section className="mx-auto mt-14 max-w-7xl px-5 sm:px-8">
-      <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-cyan-200/70">{group.eyebrow}</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">{group.title}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">{group.description}</p>
-        </div>
+      <div className={`mb-6 flex ${showHeader ? "flex-col justify-between gap-4 sm:flex-row sm:items-end" : "justify-end"}`}>
+        {showHeader && (
+          <div>
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-cyan-200/70">{group.eyebrow}</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">{group.title}</h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">{group.description}</p>
+          </div>
+        )}
         <div className="flex gap-3">
           <button
             onClick={() => scroll("prev")}
@@ -202,6 +210,34 @@ function VideoCarousel({ group }) {
   );
 }
 
+function CampaignSummary({ group }) {
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl px-5 pt-12 sm:px-8">
+      <div className="max-w-2xl">
+        <p className="text-xs font-medium uppercase tracking-[0.3em] text-cyan-200/70">{group.eyebrow}</p>
+        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">{group.title}</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-300">{group.description}</p>
+      </div>
+    </section>
+  );
+}
+
+function TrustStatement() {
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl px-5 py-8 sm:px-8">
+      <div className="max-w-3xl">
+        <p className="text-xs font-medium uppercase tracking-[0.3em] text-cyan-200/70">Seguridad por capas</p>
+        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          Un acceso rápido. Tres capas de confianza.
+        </h2>
+        <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
+          FaceR integra identidad documental, biometría facial y QR seguro para validar personas, reducir riesgos y controlar accesos con precisión.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function Feature({ icon: Icon, title, text }) {
   return (
     <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.055] p-5 shadow-xl shadow-black/10 backdrop-blur">
@@ -211,6 +247,18 @@ function Feature({ icon: Icon, title, text }) {
       <h3 className="text-base font-semibold text-white">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
     </div>
+  );
+}
+
+function FeatureSection() {
+  return (
+    <section id="que-es" className="relative z-10 mx-auto max-w-7xl px-5 py-8 sm:px-8">
+      <div className="grid gap-5 md:grid-cols-3">
+        <Feature icon={FileCheck2} title="Identidad documental" text="Validación de documentos o credenciales para fortalecer el primer filtro de acceso." />
+        <Feature icon={ScanFace} title="Reconocimiento facial" text="Confirmación biométrica para reducir suplantaciones y elevar la confianza institucional." />
+        <Feature icon={QrCode} title="QR seguro" text="Accesos ágiles, verificables y trazables para usuarios autorizados." />
+      </div>
+    </section>
   );
 }
 
@@ -227,14 +275,24 @@ export default function FacerLandingPage() {
 
       <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-6 sm:px-8">
         <BrandLogo />
-        <a
-          href="https://wa.me/525527088372"
-          target="_blank"
-          rel="noreferrer"
-          className="hidden items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-300/10 px-5 py-3 text-sm font-medium text-cyan-50 transition hover:bg-cyan-300/15 sm:flex"
-        >
-          Contacto <WhatsAppIcon className="h-4 w-4" />
-        </a>
+        <div className="hidden items-center gap-5 sm:flex">
+          <a
+            href="https://nni-official-page.web.app/"
+            target="_blank"
+            rel="noreferrer"
+            className="font-serif text-sm italic tracking-wide text-cyan-100/85 transition hover:text-white"
+          >
+            Neural Network initiative
+          </a>
+          <a
+            href="https://wa.me/525527088372"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-300/10 px-5 py-3 text-sm font-medium text-cyan-50 transition hover:bg-cyan-300/15"
+          >
+            Contacto <WhatsAppIcon className="h-4 w-4" />
+          </a>
+        </div>
       </header>
 
       <section className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 pb-10 pt-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-16 lg:pt-14">
@@ -303,19 +361,16 @@ export default function FacerLandingPage() {
         </motion.div>
       </section>
 
-      <section id="que-es" className="relative z-10 mx-auto max-w-7xl px-5 py-8 sm:px-8">
-        <div className="grid gap-5 md:grid-cols-3">
-          <Feature icon={FileCheck2} title="Identidad documental" text="Validación de documentos o credenciales para fortalecer el primer filtro de acceso." />
-          <Feature icon={ScanFace} title="Reconocimiento facial" text="Confirmación biométrica para reducir suplantaciones y elevar la confianza institucional." />
-          <Feature icon={QrCode} title="QR seguro" text="Accesos ágiles, verificables y trazables para usuarios autorizados." />
-        </div>
-      </section>
+      <TrustStatement />
 
       <div id="videos" className="relative z-10">
-        {groups.map((group) => (
-          <VideoCarousel key={group.id} group={group} />
+        {groups.map((group, index) => (
+          <VideoCarousel key={group.id} group={group} showHeader={index !== 0} />
         ))}
+        <CampaignSummary group={groups[0]} />
       </div>
+
+      <FeatureSection />
 
       <section className="relative z-10 mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.10] to-cyan-300/[0.08] p-8 shadow-2xl shadow-black/20 backdrop-blur-xl sm:p-10">

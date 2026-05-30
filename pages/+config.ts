@@ -6,8 +6,8 @@ import vikeReact from "vike-react/config";
 
 const config: Config = {
   // https://vike.dev/head-tags
-  title: "FaceR",
-  description: "Landing page de FaceR",
+  title: "Neural Network Initiative",
+  description: "Landing page de Neural Network Initiative",
   prerender: true,
 
   extends: [vikeReact],
